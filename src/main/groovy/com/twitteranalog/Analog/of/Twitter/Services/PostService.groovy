@@ -111,6 +111,10 @@ class PostService {
         }
     }
 
+    List<Post>getAllPosts(String userId) {
+        return postRepository.findByUserId(userId)
+    }
+
 
 
 

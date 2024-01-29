@@ -26,14 +26,6 @@ class Comment {
         this.userId = userId
     }
 
-    String getPostId() {
-        return postId
-    }
-
-    void setPostId(String postId) {
-        this.postId = postId
-    }
-
     String getText() {
         return text
     }

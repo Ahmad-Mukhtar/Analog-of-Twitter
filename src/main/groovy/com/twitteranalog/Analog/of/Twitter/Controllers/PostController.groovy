@@ -50,6 +50,16 @@ class PostController {
         return ResponseEntity.status(HttpStatus.OK).body(post);
     }
 
+    @GetMapping("/getFeed/{userId}")
+    ResponseEntity<?> getAllPosts(@PathVariable(name = "userId") String userId) {
+        List<Post> posts = postService.getAllPosts(userId)
+        if (posts == null)
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + userId);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(posts);
+    }
+
     @GetMapping("/getAllComments/{postId}")
     ResponseEntity<?> getAllComments(@PathVariable(name = "postId") String postId) {
         List<Comment> comments = postService.getAllComments(postId)
