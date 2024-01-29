@@ -50,4 +50,48 @@ class UserService {
             return null
         }
     }
+
+    User addFollower(String userId, String followerId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            existingUser.getFollowers().add(followerId);
+            return userRepository.save(existingUser);
+        } else {
+            return null
+        }
+    }
+
+    User removeFollower(String userId, String followerId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            existingUser.getFollowers().remove(followerId);
+            return userRepository.save(existingUser);
+        } else {
+            return null
+        }
+    }
+
+    User addFollowing(String userId, String followingId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            existingUser.getFollowing().add(followingId);
+            return userRepository.save(existingUser);
+        } else {
+            return null
+        }
+    }
+
+    User removeFollowing(String userId, String followingId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            existingUser.getFollowing().remove(followingId);
+            return userRepository.save(existingUser);
+        } else {
+            return null
+        }
+    }
 }
