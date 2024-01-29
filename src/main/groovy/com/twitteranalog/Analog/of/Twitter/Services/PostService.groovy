@@ -86,7 +86,6 @@ class PostService {
         }
     }
 
-
     Post addLike(String postId, String userId) {
         Optional<Post> optionalPost = postRepository.findById(postId);
         if (optionalPost.isPresent()) {
