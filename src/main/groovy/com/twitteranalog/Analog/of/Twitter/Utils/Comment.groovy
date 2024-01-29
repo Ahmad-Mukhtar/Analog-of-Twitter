@@ -10,6 +10,10 @@ class Comment {
     private String text;
     private LocalDateTime timestamp;
 
+    void setId(String id) {
+        this.id = id
+    }
+
     String getId() {
         return id
     }

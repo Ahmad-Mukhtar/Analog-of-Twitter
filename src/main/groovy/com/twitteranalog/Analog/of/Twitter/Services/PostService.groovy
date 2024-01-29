@@ -15,6 +15,8 @@ class PostService {
 
 
     Post createPost(Post post) {
+      post.setLikes(new ArrayList<String>())
+      post.setComments(new ArrayList<Comment>())
         return postRepository.save(post)
     }
 
@@ -68,6 +70,7 @@ class PostService {
         Optional<Post> optionalPost = postRepository.findById(postId);
         if (optionalPost.isPresent()) {
             Post existingPost = optionalPost.get();
+            comment.setId(UUID.randomUUID().toString())
             existingPost.getComments().add(comment);
             return postRepository.save(existingPost);
         } else {
@@ -75,11 +78,11 @@ class PostService {
         }
     }
 
-    Post deleteComment(String postId, Comment comment) {
+    Post deleteComment(String postId, String commentId) {
         Optional<Post> optionalPost = postRepository.findById(postId);
         if (optionalPost.isPresent()) {
             Post existingPost = optionalPost.get();
-            existingPost.getComments().remove(comment);
+            existingPost.getComments().removeIf(comment -> comment.getId() == commentId);
             return postRepository.save(existingPost);
         } else {
             return null

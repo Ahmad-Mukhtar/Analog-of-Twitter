@@ -67,17 +67,17 @@ class PostController {
         {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found with ID: " + postId);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(post);
+        return ResponseEntity.status(HttpStatus.OK).body("Comment Added Successfully");
     }
 
-    @DeleteMapping("/removeComment/{postId}")
-    ResponseEntity<?> removeComment(@PathVariable(name = "postId") String postId, @RequestBody Comment comment) {
-        Post post = postService.deleteComment(postId,comment)
+    @DeleteMapping("/removeComment/{postId}/{commentId}")
+    ResponseEntity<?> removeComment(@PathVariable(name = "postId") String postId, @PathVariable(name = "commentId") String commentId ) {
+        Post post = postService.deleteComment(postId,commentId)
         if (post == null)
         {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found with ID: " + postId);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(post);
+        return ResponseEntity.status(HttpStatus.OK).body("Comment deleted SuccessFully");
     }
 
    @PostMapping("/addLike/{postId}/{userId}")

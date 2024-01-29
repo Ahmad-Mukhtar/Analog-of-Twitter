@@ -13,6 +13,8 @@ class UserService {
     private UserRepository userRepository
 
     User createUser(User user) {
+        user.setFollowers(new ArrayList<String>())
+        user.setFollowing(new ArrayList<String>())
         return userRepository.save(user)
     }
 
