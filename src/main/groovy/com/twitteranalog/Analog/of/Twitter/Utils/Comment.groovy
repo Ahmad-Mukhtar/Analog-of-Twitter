@@ -1,16 +1,12 @@
-package com.twitteranalog.Analog.of.Twitter.Models
+package com.twitteranalog.Analog.of.Twitter.Utils
 
-import lombok.Data
-import org.springframework.data.mongodb.core.mapping.Document
 
 import java.time.LocalDateTime
 
-@Document(collection = "Comment")
 class Comment {
 
     private String id;
     private String userId;
-    private String postId;
     private String text;
     private LocalDateTime timestamp;
 

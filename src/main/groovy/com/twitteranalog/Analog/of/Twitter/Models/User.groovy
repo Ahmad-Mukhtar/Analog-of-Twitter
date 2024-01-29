@@ -1,7 +1,6 @@
 package com.twitteranalog.Analog.of.Twitter.Models
 
 
-import lombok.Data
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
@@ -12,6 +11,25 @@ class User {
     private String username;
     private String password;
     private String email;
+    List<String> followers;
+    List<String> following
+
+
+    List<String> getFollowers() {
+        return followers
+    }
+
+    void setFollowers(List<String> followers) {
+        this.followers = followers
+    }
+
+    List<String> getFollowing() {
+        return following
+    }
+
+    void setFollowing(List<String> following) {
+        this.following = following
+    }
 
     String getPassword() {
         return password
