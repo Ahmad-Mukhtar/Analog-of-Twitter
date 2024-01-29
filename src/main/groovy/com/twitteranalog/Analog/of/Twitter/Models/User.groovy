@@ -14,6 +14,9 @@ class User {
     List<String> followers;
     List<String> following
 
+    void setId(String id) {
+        this.id = id
+    }
 
     List<String> getFollowers() {
         return followers
