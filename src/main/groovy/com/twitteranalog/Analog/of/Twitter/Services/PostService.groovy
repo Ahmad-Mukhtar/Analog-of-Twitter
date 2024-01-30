@@ -8,6 +8,8 @@ import com.twitteranalog.Analog.of.Twitter.Components.Comment
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
+import java.time.LocalDateTime
+
 
 @Service
 class PostService {
@@ -20,9 +22,18 @@ class PostService {
 
 
     Post createPost(Post post) {
-      post.setLikes(new ArrayList<String>())
-      post.setComments(new ArrayList<Comment>())
-        return postRepository.save(post)
+
+        if (post.getUserId()!=null&&post.getText()!=null) {
+            post.setLikes(new ArrayList<String>())
+            post.setComments(new ArrayList<Comment>())
+            post.setTimestamp(LocalDateTime.now())
+            return postRepository.save(post)
+        }
+        else
+        {
+            throw new IllegalArgumentException("Incomplete or invalid data. Please provide all required data.");
+        }
+
     }
 
     Post deletePost(String postId) {

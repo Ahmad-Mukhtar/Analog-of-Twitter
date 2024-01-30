@@ -13,9 +13,18 @@ class UserService {
     private UserRepository userRepository
 
     User createUser(User user) {
-        user.setSubscribedTo(new ArrayList<String>())
-        user.setFavouritePosts(new ArrayList<String>())
-        return userRepository.save(user)
+        if(user.getEmail()!=null&&user.getUsername()!=null&&user.getPassword()!=null)
+        {
+            user.setSubscribedTo(new ArrayList<String>())
+            user.setFavouritePosts(new ArrayList<String>())
+            return userRepository.save(user)
+        }
+
+        else
+        {
+            throw new IllegalArgumentException("Incomplete or invalid data. Please provide all required data.");
+        }
+
     }
 
     User updateUser(String userId, User updatedUser)
