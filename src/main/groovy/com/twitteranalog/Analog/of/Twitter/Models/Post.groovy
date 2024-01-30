@@ -1,6 +1,6 @@
 package com.twitteranalog.Analog.of.Twitter.Models
 
-import com.twitteranalog.Analog.of.Twitter.Utils.Comment
+import com.twitteranalog.Analog.of.Twitter.Components.Comment
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 

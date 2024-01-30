@@ -1,4 +1,4 @@
-package com.twitteranalog.Analog.of.Twitter.Utils
+package com.twitteranalog.Analog.of.Twitter.Components
 
 
 import java.time.LocalDateTime

@@ -2,7 +2,7 @@ package com.twitteranalog.Analog.of.Twitter.Controllers
 
 import com.twitteranalog.Analog.of.Twitter.Models.Post
 import com.twitteranalog.Analog.of.Twitter.Services.PostService
-import com.twitteranalog.Analog.of.Twitter.Utils.Comment
+import com.twitteranalog.Analog.of.Twitter.Components.Comment
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

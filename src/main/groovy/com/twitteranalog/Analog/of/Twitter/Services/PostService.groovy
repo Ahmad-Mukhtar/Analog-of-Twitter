@@ -4,7 +4,7 @@ import com.twitteranalog.Analog.of.Twitter.Models.Post
 import com.twitteranalog.Analog.of.Twitter.Models.User
 import com.twitteranalog.Analog.of.Twitter.Repositories.PostRepository
 import com.twitteranalog.Analog.of.Twitter.Repositories.UserRepository
-import com.twitteranalog.Analog.of.Twitter.Utils.Comment
+import com.twitteranalog.Analog.of.Twitter.Components.Comment
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
