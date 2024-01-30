@@ -7,10 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document(collection = "User")
 class User {
     @Id
-    private String id;
-    private String username;
-    private String password;
-    private String email;
+    private String id
+    private String username
+    private String password
+    private String email
     List<String> subscribedTo
     List<String> favouritePosts
 

@@ -26,93 +26,94 @@ class PostService {
     }
 
     Post deletePost(String postId) {
-        Optional<Post> optionalPost = postRepository.findById(postId);
+        Optional<Post> optionalPost = postRepository.findById(postId) 
         if (optionalPost.isPresent()) {
-            Post existingPost = optionalPost.get();
-            postRepository.delete(existingPost);
-            return existingPost;
+            Post existingPost = optionalPost.get() 
+            postRepository.delete(existingPost) 
+            return existingPost 
         } else {
-            return null
+            throw new Exception("Post not found with Id "+postId)
         }
     }
 
     Post updatePost(String postId, Post updatedPost) {
-        Optional<Post> optionalPost = postRepository.findById(postId);
+        Optional<Post> optionalPost = postRepository.findById(postId) 
 
         if (optionalPost.isPresent()) {
-            Post existingPost = optionalPost.get();
+            Post existingPost = optionalPost.get() 
 
             if (updatedPost.getText() != null) {
-                existingPost.setText(updatedPost.getText());
+                existingPost.setText(updatedPost.getText()) 
             }
 
-            return postRepository.save(existingPost);
+            return postRepository.save(existingPost) 
 
         } else {
-            return null
+            throw new Exception("Post not found with Id "+postId)
         }
     }
 
     List<Comment> getAllComments(String postId) {
-        Optional<Post> optionalPost = postRepository.findById(postId);
+        Optional<Post> optionalPost = postRepository.findById(postId) 
         if (optionalPost.isPresent()) {
-            return optionalPost.get().getComments();
+            return optionalPost.get().getComments() 
         } else {
-            return null
+            throw new Exception("Post not found with Id "+postId)
         }
     }
 
     Post getPost(String postId) {
-        Optional<Post> optionalPost = postRepository.findById(postId);
+        Optional<Post> optionalPost = postRepository.findById(postId) 
         if (optionalPost.isPresent()) {
-            return optionalPost.get();
+            return optionalPost.get() 
         } else {
-            return null
+            throw new Exception("Post not found with Id "+postId)
         }
     }
 
     Post addComment(String postId, Comment comment) {
-        Optional<Post> optionalPost = postRepository.findById(postId);
+        Optional<Post> optionalPost = postRepository.findById(postId) 
         if (optionalPost.isPresent()) {
-            Post existingPost = optionalPost.get();
+            Post existingPost = optionalPost.get() 
             comment.setId(UUID.randomUUID().toString())
-            existingPost.getComments().add(comment);
-            return postRepository.save(existingPost);
+            existingPost.getComments().add(comment) 
+            return postRepository.save(existingPost) 
         } else {
-            return null
+            throw new Exception("Post not found with Id "+postId)
         }
     }
 
     Post deleteComment(String postId, String commentId) {
-        Optional<Post> optionalPost = postRepository.findById(postId);
+        Optional<Post> optionalPost = postRepository.findById(postId) 
         if (optionalPost.isPresent()) {
-            Post existingPost = optionalPost.get();
-            existingPost.getComments().removeIf(comment -> comment.getId() == commentId);
-            return postRepository.save(existingPost);
+            Post existingPost = optionalPost.get() 
+            existingPost.getComments().removeIf(comment -> comment.getId() == commentId) 
+            return postRepository.save(existingPost) 
         } else {
-            return null
+            throw new Exception("Post not found with Id "+postId)
         }
     }
 
     Post addLike(String postId, String userId) {
-        Optional<Post> optionalPost = postRepository.findById(postId);
+        Optional<Post> optionalPost = postRepository.findById(postId) 
         if (optionalPost.isPresent()) {
-            Post existingPost = optionalPost.get();
-            existingPost.getLikes().add(userId);
-            return postRepository.save(existingPost);
+            Post existingPost = optionalPost.get() 
+            existingPost.getLikes().add(userId) 
+            return postRepository.save(existingPost) 
         } else {
-            return null
+            throw new Exception("Post not found with Id "+postId)
         }
     }
 
     Post removeLike(String postId, String userId) {
-        Optional<Post> optionalPost = postRepository.findById(postId);
+        Optional<Post> optionalPost = postRepository.findById(postId) 
         if (optionalPost.isPresent()) {
-            Post existingPost = optionalPost.get();
-            existingPost.getLikes().remove(userId);
-            return postRepository.save(existingPost);
+            Post existingPost = optionalPost.get() 
+            existingPost.getLikes().remove(userId) 
+            return postRepository.save(existingPost) 
         } else {
-            return null
+            throw new Exception("Post not found with Id "+postId)
+
         }
     }
 
@@ -120,9 +121,9 @@ class PostService {
 
         List<Post> posts = postRepository.findByUserId(userId)
 
-        Optional<User> optionalUser = userRepository.findById(userId);
+        Optional<User> optionalUser = userRepository.findById(userId) 
         if (optionalUser.isPresent()) {
-            List<String> subscribers = optionalUser.get().getSubscribedTo();
+            List<String> subscribers = optionalUser.get().getSubscribedTo() 
             postRepository.findByUserIdIn(subscribers).forEach(posts::add)
 
         }

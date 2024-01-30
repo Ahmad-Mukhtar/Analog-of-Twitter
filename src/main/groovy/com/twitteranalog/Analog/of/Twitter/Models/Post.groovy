@@ -8,14 +8,14 @@ import java.time.LocalDateTime
 
 
 @Document(collection = "post")
-public class Post {
+class Post {
     @Id
-    private String id;
-    private String userId;
-    private String text;
-    private LocalDateTime timestamp;
-    private List<String> likes;
-    private List<Comment> comments;
+    private String id
+    private String userId
+    private String text
+    private LocalDateTime timestamp
+    private List<String> likes
+    private List<Comment> comments
 
     String getId() {
         return id

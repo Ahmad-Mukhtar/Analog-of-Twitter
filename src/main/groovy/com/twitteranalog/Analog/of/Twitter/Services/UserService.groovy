@@ -20,80 +20,86 @@ class UserService {
 
     User updateUser(String userId, User updatedUser)
     {
-        Optional<User> optionalUser = userRepository.findById(userId);
+        Optional<User> optionalUser = userRepository.findById(userId) 
 
         if (optionalUser.isPresent()) {
-            User existingUser = optionalUser.get();
+            User existingUser = optionalUser.get() 
 
             if (updatedUser.getUsername() != null) {
-                existingUser.setUsername(updatedUser.getUsername());
+                existingUser.setUsername(updatedUser.getUsername()) 
             }
             if (updatedUser.getPassword() != null) {
-                existingUser.setPassword(updatedUser.getPassword());
+                existingUser.setPassword(updatedUser.getPassword()) 
             }
 
             if (updatedUser.getEmail() != null) {
-                existingUser.setEmail(updatedUser.getEmail());
+                existingUser.setEmail(updatedUser.getEmail()) 
             }
-            return userRepository.save(existingUser);
+            return userRepository.save(existingUser) 
 
         } else {
-            return null
+            throw new Exception("User not found with Id "+userId)
+
         }
     }
 
     User deleteUser(String userId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
+        Optional<User> optionalUser = userRepository.findById(userId) 
         if (optionalUser.isPresent()) {
-            User existingUser = optionalUser.get();
-            userRepository.delete(existingUser);
-            return existingUser;
+            User existingUser = optionalUser.get() 
+            userRepository.delete(existingUser) 
+            return existingUser 
         } else {
-            return null
+            throw new Exception("User not found with Id "+userId)
+
         }
     }
 
     User addSubscriber(String userId, String followingId) {
-        Optional<User> optionalUser = userRepository.findById(followingId);
+        Optional<User> optionalUser = userRepository.findById(followingId) 
         if (optionalUser.isPresent()) {
-            User existingUser = optionalUser.get();
-            existingUser.getSubscribedTo().add(userId);
-            return userRepository.save(existingUser);
+            User existingUser = optionalUser.get() 
+            existingUser.getSubscribedTo().add(userId) 
+            return userRepository.save(existingUser) 
         } else {
-            return null
+            throw new Exception("User not found with Id "+followingId)
         }
     }
 
     User removeSubscriber(String userId, String followingId) {
-        Optional<User> optionalUser = userRepository.findById(followingId);
+        Optional<User> optionalUser = userRepository.findById(followingId) 
         if (optionalUser.isPresent()) {
-            User existingUser = optionalUser.get();
-            existingUser.getSubscribedTo().remove(userId);
-            return userRepository.save(existingUser);
+            User existingUser = optionalUser.get() 
+            existingUser.getSubscribedTo().remove(userId) 
+            return userRepository.save(existingUser) 
         } else {
-            return null
+
+            throw new Exception("User not found with Id "+followingId)
         }
     }
 
     User addFavouritePost(String userId, String favouritePostId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
+        Optional<User> optionalUser = userRepository.findById(userId) 
         if (optionalUser.isPresent()) {
-            User existingUser = optionalUser.get();
-            existingUser.getFavouritePosts().add(favouritePostId);
-            return userRepository.save(existingUser);
+            User existingUser = optionalUser.get() 
+            existingUser.getFavouritePosts().add(favouritePostId) 
+            return userRepository.save(existingUser) 
         } else {
-            return null
+            throw new Exception("User not found with Id"+userId)
+
         }
     }
 
     User removeFavouritePost(String userId, String favouritePostId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
+        Optional<User> optionalUser = userRepository.findById(userId) 
         if (optionalUser.isPresent()) {
-            User existingUser = optionalUser.get();
-            existingUser.getFavouritePosts().remove(favouritePostId);
-            return userRepository.save(existingUser);
+            User existingUser = optionalUser.get() 
+            existingUser.getFavouritePosts().remove(favouritePostId) 
+            return userRepository.save(existingUser) 
         } else {
-            return null
+
+            throw new Exception("User not found with Id"+userId)
+
         }
     }
 }

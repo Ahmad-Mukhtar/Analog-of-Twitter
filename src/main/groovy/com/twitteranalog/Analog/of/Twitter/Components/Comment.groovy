@@ -5,10 +5,10 @@ import java.time.LocalDateTime
 
 class Comment {
 
-    private String id;
-    private String userId;
-    private String text;
-    private LocalDateTime timestamp;
+    private String id
+    private String userId
+    private String text
+    private LocalDateTime timestamp
 
     void setId(String id) {
         this.id = id
