@@ -1,6 +1,6 @@
 package com.twitteranalog.Analog.of.Twitter.Services
 
-
+import com.twitteranalog.Analog.of.Twitter.Exceptions.NotFoundException
 import com.twitteranalog.Analog.of.Twitter.Models.User
 import com.twitteranalog.Analog.of.Twitter.Repositories.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,7 +15,7 @@ class UserService {
     User createUser(User user) {
         if(user.getEmail()!=null&&user.getUsername()!=null&&user.getPassword()!=null)
         {
-            user.setSubscribedTo(new ArrayList<String>())
+            user.setSubscribedBy(new ArrayList<String>())
             user.setFavouritePosts(new ArrayList<String>())
             return userRepository.save(user)
         }
@@ -47,7 +47,7 @@ class UserService {
             return userRepository.save(existingUser) 
 
         } else {
-            throw new Exception("User not found with Id "+userId)
+            throw new NotFoundException("User not found with Id "+userId)
 
         }
     }
@@ -59,7 +59,7 @@ class UserService {
             userRepository.delete(existingUser) 
             return existingUser 
         } else {
-            throw new Exception("User not found with Id "+userId)
+            throw new NotFoundException("User not found with Id "+userId)
 
         }
     }
@@ -68,10 +68,10 @@ class UserService {
         Optional<User> optionalUser = userRepository.findById(followingId) 
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get() 
-            existingUser.getSubscribedTo().add(userId) 
+            existingUser.getSubscribedBy().add(userId)
             return userRepository.save(existingUser) 
         } else {
-            throw new Exception("User not found with Id "+followingId)
+            throw new NotFoundException("User not found with Id "+followingId)
         }
     }
 
@@ -79,11 +79,11 @@ class UserService {
         Optional<User> optionalUser = userRepository.findById(followingId) 
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get() 
-            existingUser.getSubscribedTo().remove(userId) 
+            existingUser.getSubscribedBy().remove(userId)
             return userRepository.save(existingUser) 
         } else {
 
-            throw new Exception("User not found with Id "+followingId)
+            throw new NotFoundException("User not found with Id "+followingId)
         }
     }
 
@@ -94,7 +94,7 @@ class UserService {
             existingUser.getFavouritePosts().add(favouritePostId) 
             return userRepository.save(existingUser) 
         } else {
-            throw new Exception("User not found with Id"+userId)
+            throw new NotFoundException("User not found with Id"+userId)
 
         }
     }
@@ -107,7 +107,7 @@ class UserService {
             return userRepository.save(existingUser) 
         } else {
 
-            throw new Exception("User not found with Id"+userId)
+            throw new NotFoundException("User not found with Id"+userId)
 
         }
     }

@@ -11,7 +11,7 @@ class User {
     private String username
     private String password
     private String email
-    List<String> subscribedTo
+    List<String> subscribedBy
     List<String> favouritePosts
 
     List<String> getFavouritePosts() {
@@ -27,12 +27,12 @@ class User {
     }
 
 
-    List<String> getSubscribedTo() {
-        return subscribedTo
+    List<String> getSubscribedBy() {
+        return subscribedBy
     }
 
-    void setSubscribedTo(List<String> following) {
-        this.subscribedTo = following
+    void setSubscribedBy(List<String> following) {
+        this.subscribedBy = following
     }
 
     String getPassword() {

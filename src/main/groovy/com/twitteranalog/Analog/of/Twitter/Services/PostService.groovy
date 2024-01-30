@@ -1,5 +1,6 @@
 package com.twitteranalog.Analog.of.Twitter.Services
 
+import com.twitteranalog.Analog.of.Twitter.Exceptions.NotFoundException
 import com.twitteranalog.Analog.of.Twitter.Models.Post
 import com.twitteranalog.Analog.of.Twitter.Models.User
 import com.twitteranalog.Analog.of.Twitter.Repositories.PostRepository
@@ -43,7 +44,7 @@ class PostService {
             postRepository.delete(existingPost) 
             return existingPost 
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
     }
 
@@ -60,7 +61,7 @@ class PostService {
             return postRepository.save(existingPost) 
 
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
     }
 
@@ -69,7 +70,7 @@ class PostService {
         if (optionalPost.isPresent()) {
             return optionalPost.get().getComments() 
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
     }
 
@@ -78,7 +79,7 @@ class PostService {
         if (optionalPost.isPresent()) {
             return optionalPost.get() 
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
     }
 
@@ -94,7 +95,7 @@ class PostService {
             existingPost.getComments().add(comment)
             return postRepository.save(existingPost) 
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
     }
 
@@ -105,7 +106,7 @@ class PostService {
             existingPost.getComments().removeIf(comment -> comment.getId() == commentId) 
             return postRepository.save(existingPost) 
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
     }
 
@@ -116,7 +117,7 @@ class PostService {
             existingPost.getLikes().add(userId) 
             return postRepository.save(existingPost) 
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
     }
 
@@ -127,7 +128,7 @@ class PostService {
             existingPost.getLikes().remove(userId) 
             return postRepository.save(existingPost) 
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
 
         }
     }
@@ -138,7 +139,7 @@ class PostService {
 
         Optional<User> optionalUser = userRepository.findById(userId) 
         if (optionalUser.isPresent()) {
-            List<String> subscribers = optionalUser.get().getSubscribedTo() 
+            List<String> subscribers = optionalUser.get().getSubscribedBy()
             postRepository.findByUserIdIn(subscribers).forEach(posts::add)
 
         }
