@@ -85,9 +85,13 @@ class PostService {
     Post addComment(String postId, Comment comment) {
         Optional<Post> optionalPost = postRepository.findById(postId) 
         if (optionalPost.isPresent()) {
-            Post existingPost = optionalPost.get() 
-            comment.setId(UUID.randomUUID().toString())
-            existingPost.getComments().add(comment) 
+            Post existingPost = optionalPost.get()
+            if(comment.getUserId()!=null&&comment.getText()!=null)
+            {
+                comment.setId(UUID.randomUUID().toString())
+                comment.setTimestamp(LocalDateTime.now())
+            }
+            existingPost.getComments().add(comment)
             return postRepository.save(existingPost) 
         } else {
             throw new Exception("Post not found with Id "+postId)
