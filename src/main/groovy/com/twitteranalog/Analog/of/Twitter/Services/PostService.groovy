@@ -1,7 +1,9 @@
 package com.twitteranalog.Analog.of.Twitter.Services
 
 import com.twitteranalog.Analog.of.Twitter.Models.Post
+import com.twitteranalog.Analog.of.Twitter.Models.User
 import com.twitteranalog.Analog.of.Twitter.Repositories.PostRepository
+import com.twitteranalog.Analog.of.Twitter.Repositories.UserRepository
 import com.twitteranalog.Analog.of.Twitter.Utils.Comment
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -12,6 +14,9 @@ class PostService {
 
     @Autowired
     private PostRepository postRepository
+
+    @Autowired
+    private UserRepository userRepository
 
 
     Post createPost(Post post) {
@@ -111,8 +116,17 @@ class PostService {
         }
     }
 
-    List<Post>getAllPosts(String userId) {
-        return postRepository.findByUserId(userId)
+    List<Post>getFeed(String userId) {
+
+        List<Post> posts = postRepository.findByUserId(userId)
+
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            List<String> subscribers = optionalUser.get().getSubscribedTo();
+            postRepository.findByUserIdIn(subscribers).forEach(posts::add)
+
+        }
+        return posts
     }
 
 

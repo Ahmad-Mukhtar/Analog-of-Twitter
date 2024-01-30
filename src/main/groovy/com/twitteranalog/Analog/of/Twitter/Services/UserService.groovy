@@ -13,8 +13,7 @@ class UserService {
     private UserRepository userRepository
 
     User createUser(User user) {
-        user.setFollowers(new ArrayList<String>())
-        user.setFollowing(new ArrayList<String>())
+        user.setSubscribedTo(new ArrayList<String>())
         user.setFavouritePosts(new ArrayList<String>())
         return userRepository.save(user)
     }
@@ -54,44 +53,22 @@ class UserService {
         }
     }
 
-    User addFollower(String userId, String followerId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
+    User addSubscriber(String userId, String followingId) {
+        Optional<User> optionalUser = userRepository.findById(followingId);
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
-            existingUser.getFollowers().add(followerId);
+            existingUser.getSubscribedTo().add(userId);
             return userRepository.save(existingUser);
         } else {
             return null
         }
     }
 
-    User removeFollower(String userId, String followerId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
+    User removeSubscriber(String userId, String followingId) {
+        Optional<User> optionalUser = userRepository.findById(followingId);
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
-            existingUser.getFollowers().remove(followerId);
-            return userRepository.save(existingUser);
-        } else {
-            return null
-        }
-    }
-
-    User addFollowing(String userId, String followingId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isPresent()) {
-            User existingUser = optionalUser.get();
-            existingUser.getFollowing().add(followingId);
-            return userRepository.save(existingUser);
-        } else {
-            return null
-        }
-    }
-
-    User removeFollowing(String userId, String followingId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isPresent()) {
-            User existingUser = optionalUser.get();
-            existingUser.getFollowing().remove(followingId);
+            existingUser.getSubscribedTo().remove(userId);
             return userRepository.save(existingUser);
         } else {
             return null

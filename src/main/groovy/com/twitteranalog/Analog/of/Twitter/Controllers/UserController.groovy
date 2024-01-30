@@ -52,9 +52,9 @@ class UserController {
     }
 
     //The User followed Someone Else
-    @PostMapping("/addFollowing/{userId}/{followingId}")
-    ResponseEntity<?> addFollowing(@PathVariable(name = "userId") String userId, @PathVariable(name = "followingId") String followingId) {
-        User updatedUser = userService.addFollowing(userId, followingId);
+    @PostMapping("/addSubscriber/{userId}/{followingId}")
+    ResponseEntity<?> addSubscriber(@PathVariable(name = "userId") String userId, @PathVariable(name = "followingId") String followingId) {
+        User updatedUser = userService.addSubscriber(userId, followingId);
         if (updatedUser == null)
         {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + userId);
@@ -62,30 +62,9 @@ class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 
-    @DeleteMapping("/removeFollowing/{userId}/{followingId}")
-    ResponseEntity<?> removeFollowing(@PathVariable(name = "userId") String userId, @PathVariable(name = "followingId") String followingId) {
-        User updatedUser = userService.removeFollowing(userId, followingId);
-        if (updatedUser == null)
-        {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + userId);
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
-    }
-
-    //Someone Started Following the User
-    @PostMapping("/addFollower/{userId}/{followerId}")
-    ResponseEntity<?> addFollower(@PathVariable(name = "userId") String userId, @PathVariable(name = "followerId") String followerId) {
-        User updatedUser = userService.addFollower(userId, followerId);
-        if (updatedUser == null)
-        {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + userId);
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
-    }
-
-    @DeleteMapping("/removeFollower/{userId}/{followerId}")
-    ResponseEntity<?> removeFollower(@PathVariable(name = "userId") String userId, @PathVariable(name = "followerId") String followerId) {
-        User updatedUser = userService.removeFollower(userId, followerId);
+    @DeleteMapping("/removeSubscriber/{userId}/{followingId}")
+    ResponseEntity<?> removeSubscriber(@PathVariable(name = "userId") String userId, @PathVariable(name = "followingId") String followingId) {
+        User updatedUser = userService.removeSubscriber(userId, followingId);
         if (updatedUser == null)
         {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + userId);

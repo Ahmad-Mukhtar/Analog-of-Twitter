@@ -52,7 +52,7 @@ class PostController {
 
     @GetMapping("/getFeed/{userId}")
     ResponseEntity<?> getAllPosts(@PathVariable(name = "userId") String userId) {
-        List<Post> posts = postService.getAllPosts(userId)
+        List<Post> posts = postService.getFeed(userId)
         if (posts == null)
         {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + userId);

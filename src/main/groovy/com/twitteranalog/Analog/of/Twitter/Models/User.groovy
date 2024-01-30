@@ -11,8 +11,7 @@ class User {
     private String username;
     private String password;
     private String email;
-    List<String> followers;
-    List<String> following
+    List<String> subscribedTo
     List<String> favouritePosts
 
     List<String> getFavouritePosts() {
@@ -27,20 +26,13 @@ class User {
         this.id = id
     }
 
-    List<String> getFollowers() {
-        return followers
+
+    List<String> getSubscribedTo() {
+        return subscribedTo
     }
 
-    void setFollowers(List<String> followers) {
-        this.followers = followers
-    }
-
-    List<String> getFollowing() {
-        return following
-    }
-
-    void setFollowing(List<String> following) {
-        this.following = following
+    void setSubscribedTo(List<String> following) {
+        this.subscribedTo = following
     }
 
     String getPassword() {

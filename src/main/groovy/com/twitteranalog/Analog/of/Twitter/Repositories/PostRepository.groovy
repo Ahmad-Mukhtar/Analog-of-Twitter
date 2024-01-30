@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository
 interface PostRepository extends MongoRepository<Post, String> {
 
     List<Post> findByUserId(String userId)
+    List<Post> findByUserIdIn(List<String> ids)
 
 }
