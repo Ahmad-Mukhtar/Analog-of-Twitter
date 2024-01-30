@@ -1,6 +1,6 @@
 package com.twitteranalog.Analog.of.Twitter.Models
 
-
+import com.twitteranalog.Analog.of.Twitter.dtos.UserDto
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
@@ -11,8 +11,18 @@ class User {
     private String username
     private String password
     private String email
-    List<String> subscribedTo
-    List<String> favouritePosts
+    private List<String> subscribedBy
+    private List<String> favouritePosts
+
+    User(){}
+
+    User(UserDto dto){
+        this.username = dto.getUsername()
+        this.password = dto.getPassword()
+        this.email = dto.getEmail()
+        this.subscribedBy = dto.getSubscribedBy()
+        this.favouritePosts = dto.getFavouritePosts()
+    }
 
     List<String> getFavouritePosts() {
         return favouritePosts
@@ -27,12 +37,12 @@ class User {
     }
 
 
-    List<String> getSubscribedTo() {
-        return subscribedTo
+    List<String> getSubscribedBy() {
+        return subscribedBy
     }
 
-    void setSubscribedTo(List<String> following) {
-        this.subscribedTo = following
+    void setSubscribedBy(List<String> following) {
+        this.subscribedBy = following
     }
 
     String getPassword() {

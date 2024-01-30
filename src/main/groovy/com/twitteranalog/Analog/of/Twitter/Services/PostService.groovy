@@ -5,6 +5,8 @@ import com.twitteranalog.Analog.of.Twitter.Models.User
 import com.twitteranalog.Analog.of.Twitter.Repositories.PostRepository
 import com.twitteranalog.Analog.of.Twitter.Repositories.UserRepository
 import com.twitteranalog.Analog.of.Twitter.Components.Comment
+import com.twitteranalog.Analog.of.Twitter.dtos.PostDto
+import com.twitteranalog.Analog.of.Twitter.dtos.UserDto
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -21,47 +23,40 @@ class PostService {
     private UserRepository userRepository
 
 
-    Post createPost(Post post) {
-
+    PostDto createPost(PostDto post) {
         if (post.getUserId()!=null&&post.getText()!=null) {
-            post.setLikes(new ArrayList<String>())
-            post.setComments(new ArrayList<Comment>())
             post.setTimestamp(LocalDateTime.now())
-            return postRepository.save(post)
-        }
-        else
-        {
+            return new PostDto(postRepository.save(new Post(post)))
+        } else {
             throw new IllegalArgumentException("Incomplete or invalid data. Please provide all required data.");
         }
-
     }
 
-    Post deletePost(String postId) {
-        Optional<Post> optionalPost = postRepository.findById(postId) 
+    void deletePost(String postId) {
+        Optional<Post> optionalPost = postRepository.findById(postId)
+
         if (optionalPost.isPresent()) {
             Post existingPost = optionalPost.get() 
-            postRepository.delete(existingPost) 
-            return existingPost 
+            postRepository.delete(existingPost)
         } else {
             throw new Exception("Post not found with Id "+postId)
         }
     }
 
-    Post updatePost(String postId, Post updatedPost) {
+    PostDto updatePost(String postId, PostDto updatedPost) {
         Optional<Post> optionalPost = postRepository.findById(postId) 
 
         if (optionalPost.isPresent()) {
             Post existingPost = optionalPost.get() 
 
-            if (updatedPost.getText() != null) {
-                existingPost.setText(updatedPost.getText()) 
+            if (updatedPost.getText() != null && !Objects.equals(updatedPost.getText(),"")) {
+                existingPost.setText(updatedPost.getText())
+                return new PostDto(postRepository.save(existingPost))
             }
-
-            return postRepository.save(existingPost) 
-
         } else {
             throw new Exception("Post not found with Id "+postId)
         }
+        throw new Exception("Post can not be null or empty")
     }
 
     List<Comment> getAllComments(String postId) {
@@ -73,79 +68,77 @@ class PostService {
         }
     }
 
-    Post getPost(String postId) {
+    PostDto getPost(String postId) {
         Optional<Post> optionalPost = postRepository.findById(postId) 
         if (optionalPost.isPresent()) {
-            return optionalPost.get() 
+            return new PostDto(optionalPost.get())
         } else {
             throw new Exception("Post not found with Id "+postId)
         }
     }
 
-    Post addComment(String postId, Comment comment) {
-        Optional<Post> optionalPost = postRepository.findById(postId) 
+    PostDto addComment(String postId, Comment comment) {
+        Optional<Post> optionalPost = postRepository.findById(postId)
+
         if (optionalPost.isPresent()) {
             Post existingPost = optionalPost.get()
-            if(comment.getUserId()!=null&&comment.getText()!=null)
+            if(comment.getUserId() !=null && !Objects.equals(comment.getUserId(), "")
+                    && comment.getText()!=null && !Objects.equals(comment.getText(), ""))
             {
                 comment.setId(UUID.randomUUID().toString())
                 comment.setTimestamp(LocalDateTime.now())
+                existingPost.getComments().add(comment)
+                return new PostDto(postRepository.save(existingPost))
             }
-            existingPost.getComments().add(comment)
-            return postRepository.save(existingPost) 
         } else {
             throw new Exception("Post not found with Id "+postId)
         }
+        throw new Exception("Fields cannot be null or empty")
     }
 
-    Post deleteComment(String postId, String commentId) {
-        Optional<Post> optionalPost = postRepository.findById(postId) 
+    PostDto deleteComment(String postId, String commentId) {
+        Optional<Post> optionalPost = postRepository.findById(postId)
+
         if (optionalPost.isPresent()) {
             Post existingPost = optionalPost.get() 
             existingPost.getComments().removeIf(comment -> comment.getId() == commentId) 
-            return postRepository.save(existingPost) 
+            return new PostDto(postRepository.save(existingPost))
         } else {
             throw new Exception("Post not found with Id "+postId)
         }
     }
 
-    Post addLike(String postId, String userId) {
+    PostDto addLike(String postId, String userId) {
         Optional<Post> optionalPost = postRepository.findById(postId) 
         if (optionalPost.isPresent()) {
             Post existingPost = optionalPost.get() 
             existingPost.getLikes().add(userId) 
-            return postRepository.save(existingPost) 
+            return new PostDto(postRepository.save(existingPost))
         } else {
             throw new Exception("Post not found with Id "+postId)
         }
     }
 
-    Post removeLike(String postId, String userId) {
+    PostDto removeLike(String postId, String userId) {
         Optional<Post> optionalPost = postRepository.findById(postId) 
         if (optionalPost.isPresent()) {
-            Post existingPost = optionalPost.get() 
-            existingPost.getLikes().remove(userId) 
-            return postRepository.save(existingPost) 
+            Post existingPost = optionalPost.get()
+            existingPost.getLikes().remove(userId)
+            return new PostDto(postRepository.save(existingPost))
         } else {
             throw new Exception("Post not found with Id "+postId)
 
         }
     }
 
-    List<Post>getFeed(String userId) {
-
+    List<Post> getFeed(String userId) {
         List<Post> posts = postRepository.findByUserId(userId)
 
         Optional<User> optionalUser = userRepository.findById(userId) 
         if (optionalUser.isPresent()) {
-            List<String> subscribers = optionalUser.get().getSubscribedTo() 
+            List<String> subscribers = optionalUser.get().getSubscribedBy()
             postRepository.findByUserIdIn(subscribers).forEach(posts::add)
-
         }
         return posts
     }
-
-
-
-
 }

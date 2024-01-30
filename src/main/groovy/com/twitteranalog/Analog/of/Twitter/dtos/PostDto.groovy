@@ -1,16 +1,12 @@
-package com.twitteranalog.Analog.of.Twitter.Models
+package com.twitteranalog.Analog.of.Twitter.dtos
 
 import com.twitteranalog.Analog.of.Twitter.Components.Comment
-import com.twitteranalog.Analog.of.Twitter.dtos.PostDto
-import org.springframework.data.annotation.Id
-import org.springframework.data.mongodb.core.mapping.Document
+import com.twitteranalog.Analog.of.Twitter.Models.Post
 
 import java.time.LocalDateTime
 
+class PostDto {
 
-@Document(collection = "post")
-class Post {
-    @Id
     private String id
     private String userId
     private String text
@@ -18,9 +14,10 @@ class Post {
     private List<String> likes
     private List<Comment> comments
 
-    Post(){}
+    PostDto(){}
 
-    Post(PostDto post) {
+    PostDto(Post post) {
+        this.id = post.getId()
         this.userId = post.getUserId()
         this.text = post.getText()
         this.timestamp = post.getTimestamp()
@@ -30,6 +27,18 @@ class Post {
 
     String getId() {
         return id
+    }
+
+    void setId(String id) {
+        this.id = id
+    }
+
+    String getUserId() {
+        return userId
+    }
+
+    void setUserId(String userId) {
+        this.userId = userId
     }
 
     String getText() {
@@ -63,14 +72,4 @@ class Post {
     void setComments(List<Comment> comments) {
         this.comments = comments
     }
-
-    String getUserId() {
-        return userId
-    }
-
-    void setUserId(String userId) {
-        this.userId = userId
-    }
-
 }
-
