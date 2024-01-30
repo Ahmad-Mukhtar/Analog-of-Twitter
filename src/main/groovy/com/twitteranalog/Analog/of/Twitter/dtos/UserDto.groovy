@@ -6,7 +6,7 @@ class UserDto {
     private String username
     private String password
     private String email
-    private List<String> subscribedBy
+    private List<String> subscribedTo
     private List<String> favouritePosts
 
     UserDto(){}
@@ -15,7 +15,7 @@ class UserDto {
         this.username = user.getUsername()
         this.password = user.getPassword()
         this.email = user.getEmail()
-        this.subscribedBy = user.getSubscribedBy()
+        this.subscribedTo = user.getSubscribedTo()
         this.favouritePosts = user.getFavouritePosts()
     }
 
@@ -43,12 +43,12 @@ class UserDto {
         this.email = email
     }
 
-    List<String> getSubscribedBy() {
-        return subscribedBy
+    List<String> getSubscribedTo() {
+        return subscribedTo
     }
 
-    void setSubscribedBy(List<String> subscribedBy) {
-        this.subscribedBy = subscribedBy
+    void setSubscribedTo(List<String> subscribedTo) {
+        this.subscribedTo = subscribedTo
     }
 
     List<String> getFavouritePosts() {

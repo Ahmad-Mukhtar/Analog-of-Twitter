@@ -57,13 +57,13 @@ class UserService {
     }
 
     UserDto addSubscriber(String userId, String followingId) {
-        Optional<User> optionalUser = userRepository.findById(followingId) 
+        Optional<User> optionalUser = userRepository.findById(userId)
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get() 
-            existingUser.getSubscribedBy().add(userId)
+            existingUser.getSubscribedTo().add(followingId)
             return new UserDto(userRepository.save(existingUser))
         } else {
-            throw new Exception("User not found with Id "+followingId)
+            throw new Exception("User not found with Id "+userId)
         }
     }
 
@@ -72,7 +72,7 @@ class UserService {
 
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get() 
-            existingUser.getSubscribedBy().remove(userId)
+            existingUser.getSubscribedTo().remove(userId)
             return new UserDto(userRepository.save(existingUser))
         } else {
             throw new Exception("User not found with Id "+followingId)

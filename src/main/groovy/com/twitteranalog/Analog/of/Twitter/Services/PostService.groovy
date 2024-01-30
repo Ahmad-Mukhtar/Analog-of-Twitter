@@ -137,7 +137,7 @@ class PostService {
 
         Optional<User> optionalUser = userRepository.findById(userId) 
         if (optionalUser.isPresent()) {
-            List<String> subscribers = optionalUser.get().getSubscribedBy()
+            List<String> subscribers = optionalUser.get().getSubscribedTo()
             postRepository.findByUserIdIn(subscribers).forEach(posts::add)
         }
         return posts
