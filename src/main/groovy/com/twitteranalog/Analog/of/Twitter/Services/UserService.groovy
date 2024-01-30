@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service
 @Service
 class UserService {
 
-    @Autowired
     private UserRepository userRepository
+
+    UserService(UserRepository userRepository) {
+        this.userRepository = userRepository
+    }
 
     UserDto createUser(UserDto dto) {
         Optional<User> checkUser = userRepository.findByEmail(dto.getEmail())

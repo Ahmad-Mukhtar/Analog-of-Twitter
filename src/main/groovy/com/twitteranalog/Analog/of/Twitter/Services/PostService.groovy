@@ -17,11 +17,15 @@ import java.time.LocalDateTime
 @Service
 class PostService {
 
-    @Autowired
+
     private PostRepository postRepository
 
-    @Autowired
     private UserRepository userRepository
+
+    PostService(PostRepository postRepository, UserRepository userRepository) {
+        this.postRepository = postRepository
+        this.userRepository = userRepository
+    }
 
 
     PostDto createPost(PostDto post) {
