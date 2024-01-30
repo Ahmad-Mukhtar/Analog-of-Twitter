@@ -13,6 +13,15 @@ class User {
     private String email;
     List<String> followers;
     List<String> following
+    List<String> favouritePosts
+
+    List<String> getFavouritePosts() {
+        return favouritePosts
+    }
+
+    void setFavouritePosts(List<String> favouritePosts) {
+        this.favouritePosts = favouritePosts
+    }
 
     void setId(String id) {
         this.id = id

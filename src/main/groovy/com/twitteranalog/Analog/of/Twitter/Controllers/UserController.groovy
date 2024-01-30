@@ -93,4 +93,24 @@ class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 
+    @PostMapping("/addFavouritePost/{userId}/{postId}")
+    ResponseEntity<?> addPost(@PathVariable(name = "userId") String userId,@PathVariable(name = "postId") String postId) {
+        User updatedUser = userService.addFavouritePost(userId, postId);
+        if (updatedUser == null)
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + userId);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
+    }
+
+    @DeleteMapping("/removeFavouritePost/{userId}/{postId}")
+    ResponseEntity<?> removePost(@PathVariable(name = "userId") String userId,@PathVariable(name = "postId") String postId) {
+        User updatedUser = userService.removeFavouritePost(userId, postId);
+        if (updatedUser == null)
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + userId);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
+    }
+
 }

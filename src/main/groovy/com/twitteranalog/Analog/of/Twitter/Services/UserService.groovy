@@ -15,6 +15,7 @@ class UserService {
     User createUser(User user) {
         user.setFollowers(new ArrayList<String>())
         user.setFollowing(new ArrayList<String>())
+        user.setFavouritePosts(new ArrayList<String>())
         return userRepository.save(user)
     }
 
@@ -91,6 +92,28 @@ class UserService {
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
             existingUser.getFollowing().remove(followingId);
+            return userRepository.save(existingUser);
+        } else {
+            return null
+        }
+    }
+
+    User addFavouritePost(String userId, String favouritePostId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            existingUser.getFavouritePosts().add(favouritePostId);
+            return userRepository.save(existingUser);
+        } else {
+            return null
+        }
+    }
+
+    User removeFavouritePost(String userId, String favouritePostId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            existingUser.getFavouritePosts().remove(favouritePostId);
             return userRepository.save(existingUser);
         } else {
             return null
