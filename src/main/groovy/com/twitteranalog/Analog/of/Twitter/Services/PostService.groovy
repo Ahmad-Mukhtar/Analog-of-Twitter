@@ -1,5 +1,6 @@
 package com.twitteranalog.Analog.of.Twitter.Services
 
+import com.twitteranalog.Analog.of.Twitter.Exceptions.NotFoundException
 import com.twitteranalog.Analog.of.Twitter.Models.Post
 import com.twitteranalog.Analog.of.Twitter.Models.User
 import com.twitteranalog.Analog.of.Twitter.Repositories.PostRepository
@@ -39,7 +40,7 @@ class PostService {
             Post existingPost = optionalPost.get() 
             postRepository.delete(existingPost)
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
     }
 
@@ -54,7 +55,7 @@ class PostService {
                 return new PostDto(postRepository.save(existingPost))
             }
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
         throw new Exception("Post can not be null or empty")
     }
@@ -64,7 +65,7 @@ class PostService {
         if (optionalPost.isPresent()) {
             return optionalPost.get().getComments() 
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
     }
 
@@ -73,7 +74,7 @@ class PostService {
         if (optionalPost.isPresent()) {
             return new PostDto(optionalPost.get())
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
     }
 
@@ -91,7 +92,7 @@ class PostService {
                 return new PostDto(postRepository.save(existingPost))
             }
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
         throw new Exception("Fields cannot be null or empty")
     }
@@ -104,7 +105,7 @@ class PostService {
             existingPost.getComments().removeIf(comment -> comment.getId() == commentId) 
             return new PostDto(postRepository.save(existingPost))
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
     }
 
@@ -115,7 +116,7 @@ class PostService {
             existingPost.getLikes().add(userId) 
             return new PostDto(postRepository.save(existingPost))
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
         }
     }
 
@@ -126,7 +127,7 @@ class PostService {
             existingPost.getLikes().remove(userId)
             return new PostDto(postRepository.save(existingPost))
         } else {
-            throw new Exception("Post not found with Id "+postId)
+            throw new NotFoundException("Post not found with Id "+postId)
 
         }
     }
