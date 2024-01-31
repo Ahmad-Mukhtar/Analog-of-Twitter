@@ -1,11 +1,12 @@
-package com.twitteranalog.Analog.of.Twitter
+package com.twitteranalog.Analog.of.Twitter.test
 
+import com.twitteranalog.Analog.of.Twitter.AnalogOfTwitterApplicationTests
 import com.twitteranalog.Analog.of.Twitter.Models.User
 import com.twitteranalog.Analog.of.Twitter.Repositories.UserRepository
 import com.twitteranalog.Analog.of.Twitter.Services.UserService
 import com.twitteranalog.Analog.of.Twitter.dtos.UserDto
 
-class UserTest extends AnalogOfTwitterApplicationTests {
+class UserServiceTest extends AnalogOfTwitterApplicationTests {
 
 
     UserRepository userRepository=Mock()

@@ -1,5 +1,6 @@
-package com.twitteranalog.Analog.of.Twitter
+package com.twitteranalog.Analog.of.Twitter.test
 
+import com.twitteranalog.Analog.of.Twitter.AnalogOfTwitterApplicationTests
 import com.twitteranalog.Analog.of.Twitter.Components.Comment
 import com.twitteranalog.Analog.of.Twitter.Models.Post
 import com.twitteranalog.Analog.of.Twitter.Models.User
@@ -10,7 +11,7 @@ import com.twitteranalog.Analog.of.Twitter.dtos.PostDto
 
 import java.time.LocalDateTime
 
-class PostTest extends AnalogOfTwitterApplicationTests{
+class PostServiceTest extends AnalogOfTwitterApplicationTests{
 
     PostRepository postRepository=Mock()
     UserRepository userRepository=Mock()
