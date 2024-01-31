@@ -4,7 +4,7 @@ import com.twitteranalog.Analog.of.Twitter.dtos.UserDto
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document(collection = "User")
+@Document(collection = "Users")
 class User {
     @Id
     private String id

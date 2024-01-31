@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
 
 
-@Document(collection = "post")
+@Document(collection = "Posts")
 class Post {
     @Id
     private String id
