@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/posts")
 class PostController {
 
-    @Autowired
     PostService postService
+
+    PostController(PostService postService) {
+        this.postService = postService
+    }
 
     @PostMapping("/addPost")
     ResponseEntity<?> createUser(@RequestBody PostDto post) {

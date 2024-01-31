@@ -1,6 +1,6 @@
 package com.twitteranalog.Analog.of.Twitter.Controllers
 
-import com.twitteranalog.Analog.of.Twitter.Models.User
+
 import com.twitteranalog.Analog.of.Twitter.Services.UserService
 import com.twitteranalog.Analog.of.Twitter.dtos.UserDto
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/users")
 class UserController {
 
-    @Autowired
     UserService userService
+
+    UserController(UserService userService) {
+        this.userService = userService
+    }
 
 
     @PostMapping("/addUser")
