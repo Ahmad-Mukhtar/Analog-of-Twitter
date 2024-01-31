@@ -1,4 +1,4 @@
-package com.twitteranalog.Analog.of.Twitter.test
+package com.twitteranalog.Analog.of.Twitter.ServiceTest
 
 import com.twitteranalog.Analog.of.Twitter.AnalogOfTwitterApplicationTests
 import com.twitteranalog.Analog.of.Twitter.Models.User
@@ -86,7 +86,7 @@ class UserServiceTest extends AnalogOfTwitterApplicationTests {
         userService.deleteUser(userId);
 
         then:
-        1 * userRepository.delete(existingUser) // Verify that delete is called once
+        1 * userRepository.delete(existingUser)
     }
 
     //Add Subscriber
@@ -102,7 +102,7 @@ class UserServiceTest extends AnalogOfTwitterApplicationTests {
         expectedUserDto.getSubscribedTo().add(followingId);
 
         userRepository.findById(userId) >> Optional.of(existingUser);
-        userRepository.save(existingUser) >> existingUser; // Return the updated user
+        userRepository.save(existingUser) >> existingUser;
 
         when:
         UserDto updatedUserDto = userService.addSubscriber(userId, followingId);
@@ -126,7 +126,7 @@ class UserServiceTest extends AnalogOfTwitterApplicationTests {
         expectedUserDto.getSubscribedTo().remove(userId);
 
         userRepository.findById(followingId) >> Optional.of(existingUser);
-        userRepository.save(existingUser) >> existingUser; // Return the updated user
+        userRepository.save(existingUser) >> existingUser;
 
         when:
         UserDto updatedUserDto = userService.removeSubscriber(userId, followingId);
@@ -151,7 +151,7 @@ class UserServiceTest extends AnalogOfTwitterApplicationTests {
         expectedUserDto.getFavouritePosts().add(favouritePostId);
 
         userRepository.findById(userId) >> Optional.of(existingUser);
-        userRepository.save(existingUser) >> existingUser; // Return the updated user
+        userRepository.save(existingUser) >> existingUser;
 
         when:
         UserDto updatedUserDto = userService.addFavouritePost(userId, favouritePostId);
@@ -175,7 +175,7 @@ class UserServiceTest extends AnalogOfTwitterApplicationTests {
         expectedUserDto.getFavouritePosts().remove(favouritePostId);
 
         userRepository.findById(userId) >> Optional.of(existingUser);
-        userRepository.save(existingUser) >> existingUser; // Return the updated user
+        userRepository.save(existingUser) >> existingUser;
 
         when:
         UserDto updatedUserDto = userService.removeFavouritePost(userId, favouritePostId);

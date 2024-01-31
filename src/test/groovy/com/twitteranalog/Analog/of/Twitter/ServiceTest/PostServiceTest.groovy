@@ -1,4 +1,4 @@
-package com.twitteranalog.Analog.of.Twitter.test
+package com.twitteranalog.Analog.of.Twitter.ServiceTest
 
 import com.twitteranalog.Analog.of.Twitter.AnalogOfTwitterApplicationTests
 import com.twitteranalog.Analog.of.Twitter.Components.Comment
@@ -81,7 +81,7 @@ class PostServiceTest extends AnalogOfTwitterApplicationTests{
         )
 
         postRepository.findById(postId) >> Optional.of(existingPost)
-        postRepository.save(existingPost) >> existingPost // Assuming save returns the updated post
+        postRepository.save(existingPost) >> existingPost
 
         when:
         PostDto result = postService.updatePost(postId, updatedPostDto)
@@ -157,7 +157,7 @@ class PostServiceTest extends AnalogOfTwitterApplicationTests{
         )
 
         postRepository.findById(postId) >> Optional.of(existingPost)
-        postRepository.save(existingPost) >> existingPost // Assuming save returns the updated post
+        postRepository.save(existingPost) >> existingPost
 
         when:
         PostDto result = postService.addComment(postId, newComment)
@@ -190,7 +190,7 @@ class PostServiceTest extends AnalogOfTwitterApplicationTests{
         )
 
         postRepository.findById(postId) >> Optional.of(existingPost)
-        postRepository.save(existingPost) >> existingPost // Assuming save returns the updated post
+        postRepository.save(existingPost) >> existingPost
 
         when:
         PostDto result = postService.deleteComment(postId, commentIdToDelete)
@@ -215,7 +215,7 @@ class PostServiceTest extends AnalogOfTwitterApplicationTests{
         )
 
         postRepository.findById(postId) >> Optional.of(existingPost)
-        postRepository.save(existingPost) >> existingPost // Assuming save returns the updated post
+        postRepository.save(existingPost) >> existingPost
 
         when:
         PostDto result = postService.addLike(postId, userIdToAdd)
@@ -242,7 +242,7 @@ class PostServiceTest extends AnalogOfTwitterApplicationTests{
         )
 
         postRepository.findById(postId) >> Optional.of(existingPost)
-        postRepository.save(existingPost) >> existingPost // Assuming save returns the updated post
+        postRepository.save(existingPost) >> existingPost
 
         when:
         PostDto result = postService.removeLike(postId, userIdToRemove)
