@@ -1,18 +1,15 @@
 package com.twitteranalog.Analog.of.Twitter.Services
 
+import com.twitteranalog.Analog.of.Twitter.Components.Comment
 import com.twitteranalog.Analog.of.Twitter.Exceptions.NotFoundException
 import com.twitteranalog.Analog.of.Twitter.Models.Post
 import com.twitteranalog.Analog.of.Twitter.Models.User
 import com.twitteranalog.Analog.of.Twitter.Repositories.PostRepository
 import com.twitteranalog.Analog.of.Twitter.Repositories.UserRepository
-import com.twitteranalog.Analog.of.Twitter.Components.Comment
 import com.twitteranalog.Analog.of.Twitter.dtos.PostDto
-import com.twitteranalog.Analog.of.Twitter.dtos.UserDto
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 import java.time.LocalDateTime
-
 
 @Service
 class PostService {
