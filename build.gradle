@@ -24,12 +24,19 @@ repositories {
 dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation('org.springframework.boot:spring-boot-starter-web')
+	implementation "org.springframework.boot:spring-boot-starter-jetty"
 	implementation 'org.apache.groovy:groovy'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.spockframework:spock-core:2.4-M1-groovy-4.0'
+
+	modules {
+		module("org.springframework.boot:spring-boot-starter-tomcat") {
+			replacedBy("org.springframework.boot:spring-boot-starter-jetty")
+		}
+	}
 }
 
 tasks.named('test') {
